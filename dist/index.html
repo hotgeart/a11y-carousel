@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link href="demo.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>a11y carousel</h1>
+    <div id="slider">
+      <div>
+        <a href="#">
+          <img src="https://i.picsum.photos/id/1068/970/400.jpg" alt="" />
+        </a>
+      </div>
+      <div>
+        <a href="#">
+          <img src="https://i.picsum.photos/id/656/970/400.jpg" alt="" />
+        </a>
+      </div>
+      <div>
+        <a href="#">
+          <img src="https://i.picsum.photos/id/227/970/400.jpg" alt="" />
+        </a>
+      </div>
+      <div>
+        <a href="#">
+          <img src="https://i.picsum.photos/id/427/970/400.jpg" alt="" />
+        </a>
+      </div>
+      <div>
+        <a href="#">
+          <img src="https://i.picsum.photos/id/1073/970/400.jpg" alt="" />
+        </a>
+      </div>
+    </div>
+    <script src="a11y-carousel.min.js"></script>
+    <!--<script src="../src/a11y-carousel.js"></script>-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var slider = new A11yCarousel("#slider", {
+          autoplay: true
+        });
+      });
+    </script>
+  </body>
+</html>
