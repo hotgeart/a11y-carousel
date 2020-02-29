@@ -1,0 +1,24 @@
+body {
+  font-family: sans-serif;
+}
+ul {
+  margin: 0;
+  padding: 0;
+
+    li {
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+*:focus {
+  outline: 3px solid #ffa500;
+}
+button {
+  display: inline-block;
+  margin: 4px;
+}

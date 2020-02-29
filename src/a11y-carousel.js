@@ -1,3 +1,7 @@
+//@prepros-prepend lib/Array.from.js
+//@prepros-prepend lib/NodeList.forEach.js
+//@prepros-prepend lib/Element.dataset.js
+
 class A11yCarousel {
   constructor(selector, userSettings) {
     // Default Settings of the Slide show
@@ -99,7 +103,7 @@ class A11yCarousel {
           `${this._selector.slice(1)}-tabpanel-${index}`
         );
         dotButton.setAttribute(`id`, `${this._selector.slice(1)}-tab-${index}`);
-        dotButton.dataset.sliderId = index;
+        dotButton.setAttribute(`slider-id`, index);
         dotButton.setAttribute(`role`, `tab`);
         dotButton.setAttribute(`tabindex`, -1);
         // the first one need to be accessible via [TAB]
@@ -111,7 +115,7 @@ class A11yCarousel {
 
         // Event Listeners dots click
         dotButton.addEventListener(`click`, e => {
-          this.setSlider(e.target.dataset.sliderId);
+          this.setSlider(e.target.getAttribute(`slider-id`));
         });
 
         // Event Listeners dots keyboard arrows
@@ -120,21 +124,21 @@ class A11yCarousel {
           if (e.which == 39 && this._canClick) {
             if (e.currentTarget.nextSibling !== null) {
               e.currentTarget.nextSibling.focus();
-              this.setSlider(e.currentTarget.nextSibling.dataset.sliderId);
+              this.setSlider(e.currentTarget.nextSibling.getAttribute(`slider-id`));
             }
           }
           // <-
           if (e.which == 37 && this._canClick) {
             if (e.currentTarget.previousSibling !== null) {
               e.currentTarget.previousSibling.focus();
-              this.setSlider(e.currentTarget.previousSibling.dataset.sliderId);
+              this.setSlider(e.currentTarget.previousSibling.getAttribute(`slider-id`));
             }
           }
           // HOME
           if (e.which == 36 && this._canClick) {
             e.currentTarget.parentNode.childNodes[0].focus();
             this.setSlider(
-              e.currentTarget.parentNode.childNodes[0].dataset.sliderId
+              e.currentTarget.parentNode.childNodes[0].getAttribute(`slider-id`)
             );
           }
           // END
@@ -145,7 +149,7 @@ class A11yCarousel {
             this.setSlider(
               e.currentTarget.parentNode.childNodes[
                 e.currentTarget.parentNode.childNodes.length - 1
-              ].dataset.sliderId
+              ].getAttribute(`slider-id`)
             );
           }
         });
