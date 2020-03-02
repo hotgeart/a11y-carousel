@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  background: #eef4fb;
+  color: #0c125c;
 }
 ul {
   margin: 0;
@@ -19,6 +21,16 @@ img {
   outline: 3px solid #ffa500;
 }
 button {
+  cursor: pointer;
   display: inline-block;
   margin: 4px;
+  background: #ddd;
+  border: 1px solid black;
+  appearance: none;
+  padding: .7rem 1.5rem;
+  
+  &.active {
+    background:  #555;
+    color: #fff;
+  }
 }
