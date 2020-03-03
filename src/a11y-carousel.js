@@ -8,7 +8,7 @@ class A11yCarousel {
     // Default Settings of the Slide show
     const defaultSettings = {
       autoplay: true,
-      autoplaySpeed: 1000,
+      autoplaySpeed: 3000,
       transitionSpeed: 300,
       arrows: true,
       dots: true,
@@ -39,7 +39,9 @@ class A11yCarousel {
     this._prevId = `${this._selector.slice(1)}-prev`;
     this._nextId = `${this._selector.slice(1)}-next`;
     this._sliderIndex = this.getSettings().sliderIndex;
-    this._isPlaying = this.getSettings().autoplay;
+    this._wasPlaying = this.getSettings().autoplay;
+    this._canAutoSlide = true;
+    this._autoPlayInterval = null;
 
     // Create a wrapper for the whole slide show
     const sliderWrapper = document.createElement(`div`);
@@ -192,15 +194,13 @@ class A11yCarousel {
     if (this.getSettings().autoplay) {
       playBtn.setAttribute(`id`, this._playId);
 
+      this._autoPlayInterval = setInterval(
+        this.autoPlay,
+        this.getSettings().autoplaySpeed
+      );
+
       if (this.getSettings().autoplay) {
         playBtn.textContent = this.getSettings().pauseText;
-        playBtn.classList.add(`playing`);
-
-        // Make autoPlayInterval to play with it everywhere
-        window.autoPlayInterval = setInterval(
-          this.autoPlay,
-          this.getSettings().autoplaySpeed
-        );
         playBtn.classList.add(`playing`);
         sliderWrapper.insertAdjacentElement(`afterbegin`, playBtn);
       } else {
@@ -218,19 +218,14 @@ class A11yCarousel {
         playBtn.classList.toggle(`paused`);
         this._element.setAttribute(`aria-live`, (this._element.getAttribute(`aria-live`) == `polite`) ? `off` : `polite`);
 
-        if (this._isPlaying) {
-          clearInterval(autoPlayInterval);
+        if (this._wasPlaying) {
           playBtn.textContent = this.getSettings().playText;
+          this._canAutoSlide = false;
         } else {
+          this._canAutoSlide = true;
           playBtn.textContent = this.getSettings().pauseText;
-          // TODO : Create a function ?
-          // restart autoplay
-          window.autoPlayInterval = setInterval(
-            this.autoPlay,
-            this.getSettings().autoplaySpeed
-          );
         }
-        this._isPlaying = !this._isPlaying;
+        this._wasPlaying = !this._wasPlaying;
       }
       // prev
       else if (e.target && e.target.id == this._prevId) {
@@ -255,21 +250,36 @@ class A11yCarousel {
       }, 200));
     }
 
-    // Pause Hover
+    // Pause Hover && Focus
     if (this.getSettings().pauseOnHover) {
       sliderWrapper.addEventListener(`mouseenter`, () => {
-        clearInterval(autoPlayInterval);
+        this._canAutoSlide = false;
         this._element.setAttribute(`aria-live`, `polite`);
       });
       sliderWrapper.addEventListener(`mouseleave`, () => {
-        if (this._isPlaying) {
-          // TODO : Create a function ?
-          // restart autoplay
-          window.autoPlayInterval = setInterval(
-            this.autoPlay,
-            this.getSettings().autoplaySpeed
-          );
+        if (this._wasPlaying) {
+          this._canAutoSlide = true;
           this._element.setAttribute(`aria-live`, `off`);
+        }
+      });
+
+      // when focus on a button (except play/pause) the carousel stop and is "polite"
+      const buttons = sliderWrapper.querySelectorAll(`button`);
+      buttons.forEach((button, index) => {
+        if(button.getAttribute(`id`) !== this._playId) {
+          button.addEventListener(`focus`, () => {
+            this._canAutoSlide = false;
+            this._element.setAttribute(`aria-live`, `polite`);
+          });
+        }
+      });
+
+      sliderWrapper.addEventListener('focusout', (e) => {
+        if (!sliderWrapper.contains(e.relatedTarget)) {
+          if (this._wasPlaying) {
+            this._canAutoSlide = true;
+            this._element.setAttribute(`aria-live`, `off`);
+          }
         }
       });
     }
@@ -301,16 +311,6 @@ class A11yCarousel {
     this._slides[oldIndex].style.zIndex = 2;
     this._slides[newIndex].style.zIndex = 1;
     this._slides[newIndex].style.display = `block`;
-
-    // TODO : Create a function ?
-    // restart autoplay
-    if (this.getSettings().autoPlay && this._isPlaying) {
-      clearInterval(autoPlayInterval);
-      window.autoPlayInterval = setInterval(
-        this.autoPlay,
-        this.getSettings().autoplaySpeed
-      );
-    }
 
     // Active class for Dot
     if (this.getSettings().dots) {
@@ -372,7 +372,9 @@ class A11yCarousel {
    * function called by the setInterval autoplay
    */
   autoPlay = () => {
-    this.setSlider(this._sliderIndex + 1);
+    if(this._canAutoSlide) {
+      this.setSlider(this._sliderIndex + 1);
+    }
   };
 
   /*
