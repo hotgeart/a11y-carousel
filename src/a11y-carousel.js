@@ -11,8 +11,8 @@ class A11yCarousel {
       autoplay: true,
       autoplaySpeed: 7000,
       transitionSpeed: 300,
-      arrows: false,
-      dots: true,
+      arrows: true,
+      dots: false,
       sliderIndex: 0,
       width: `auto`,
       height: `auto`,
@@ -90,6 +90,8 @@ class A11yCarousel {
       item.style.opacity = 1;
       item.style.position = `absolute`;
       item.style.top = 0;
+      item.style.left = 0;
+      item.style.right = 0;
       item.style.display = `none`;
 
       if (index === this._sliderIndex) {

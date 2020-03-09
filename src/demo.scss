@@ -15,7 +15,7 @@ ul {
 }
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
 }
 button:focus {
   outline: 3px solid #ffa500;
@@ -60,5 +60,8 @@ button {
 .dots {
   position: absolute;
   z-index: 10;
+  left: 0;
+  right: 0;
   bottom: 0;
+  text-align: center;
 }
