@@ -1,6 +1,7 @@
 //@prepros-prepend lib/Array.from.js
 //@prepros-prepend lib/Debounce.js
 //@prepros-prepend lib/NodeList.forEach.js
+//@prepros-prepend lib/Object.assign.js
 //@prepros-prepend lib/TinyGesture.js
 
 class A11yCarousel {
@@ -8,9 +9,9 @@ class A11yCarousel {
     // Default Settings of the Slide show
     const defaultSettings = {
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 7000,
       transitionSpeed: 300,
-      arrows: true,
+      arrows: false,
       dots: true,
       sliderIndex: 0,
       width: `auto`,
@@ -42,6 +43,10 @@ class A11yCarousel {
     this._wasPlaying = this.getSettings().autoplay;
     this._canAutoSlide = true;
     this._autoPlayInterval = null;
+
+    if (this.getSettings().transitionSpeed > this.getSettings().autoplaySpeed) {
+      throw `a11y Carousel: 🤚 transitionSpeed can be greater than autoplaySpeed`;
+    }
 
     // Create a wrapper for the whole slide show
     const sliderWrapper = document.createElement(`div`);
@@ -196,7 +201,7 @@ class A11yCarousel {
 
       this._autoPlayInterval = setInterval(
         this.autoPlay,
-        this.getSettings().autoplaySpeed
+        parseInt(this.getSettings().autoplaySpeed)
       );
 
       if (this.getSettings().autoplay) {
@@ -229,11 +234,11 @@ class A11yCarousel {
       }
       // prev
       else if (e.target && e.target.id == this._prevId) {
-        this.setSlider(this._sliderIndex - 1);
+        this.setSlider(parseInt(this._sliderIndex) - 1);
       }
       // next
       else if (e.target && e.target.id == this._nextId) {
-        this.setSlider(this._sliderIndex + 1);
+        this.setSlider(parseInt(this._sliderIndex) + 1);
       } else {}
     }, 200));
 
@@ -242,11 +247,11 @@ class A11yCarousel {
       const gesture = new TinyGesture(this._element);
       // next
       gesture.on('swiperight', debounce (() => {
-        this.setSlider(this._sliderIndex - 1);
+        this.setSlider(parseInt(this._sliderIndex) - 1);
       }, 200));
       // prev
       gesture.on('swipeleft', debounce (() => {
-        this.setSlider(this._sliderIndex + 1);
+        this.setSlider(parseInt(this._sliderIndex) + 1);
       }, 200));
     }
 
@@ -289,17 +294,19 @@ class A11yCarousel {
    * Select a slide
    */
   setSlider = debounce ((sliderIndex = 0) => {
-    // If current slider do nothing
-    if (this._sliderIndex == sliderIndex) {
-      return null;
-    }
     // If last slider, got to the first one
     if (sliderIndex >= this._slides.length) {
       sliderIndex = 0;
     }
+    
     // If first slider, got to the last one
     if (sliderIndex < 0) {
       sliderIndex = this._slides.length - 1;
+    }
+    
+    // If current slider do nothing
+    if (this._sliderIndex == sliderIndex) {
+      return null;
     }
 
     // Annimation
@@ -318,8 +325,10 @@ class A11yCarousel {
       dots.forEach(item => {
         if(item.getAttribute(`slider-id`) == newIndex) {
           item.classList.add(`active`);
+          item.setAttribute(`tabindex`, 0);
         } else {
-          item.classList.remove(`active`);
+          item.classList.remove(`active`);          
+          item.setAttribute(`tabindex`, -1);
         }
       })
     }
@@ -330,7 +339,7 @@ class A11yCarousel {
       this._slides[newIndex].style.zIndex = 2;
       this._slides[oldIndex].style.opacity = null;
       this._slides[oldIndex].style.display = `none`;
-    }, this.getSettings().transitionSpeed + 100); // Need more time than transitionSpeed to avoid annimation glitches
+    }, parseInt(this.getSettings().transitionSpeed) + 100); // Need more time than transitionSpeed to avoid annimation glitches
   }, 200);
 
   /**
@@ -340,10 +349,14 @@ class A11yCarousel {
   initSlidesSize = () => {
     const imgs = Array.from(this._element.querySelectorAll(`img`));
 
+    // If there's no imgs or the imgs are cached
     if (imgs.length == 0) {
+      this.setSize();
+    } else {
       this.setSize();
     }
 
+    // If there's imgs and when need to wait them
     imgs[imgs.length-1].addEventListener('load', () => {
       this.setSize();
     });
@@ -354,8 +367,8 @@ class A11yCarousel {
    */
   setSize = debounce (() => {
       if (this.getSettings().width !== `auto`) {
-        this._element.style.width = this.getSettings().height;
-        this._element.style.maxWidth = this.getSettings().height;
+        this._element.style.width = this.getSettings().width;
+        this._element.style.maxWidth = this.getSettings().width;
         this._element.style.overflowX = `hidden`;
       }
   
@@ -364,7 +377,7 @@ class A11yCarousel {
         this._element.style.maxHeight = this.getSettings().height;
         this._element.style.overflowY = `hidden`;
       } else {
-        this._element.style.height = `${this._slides[this._sliderIndex].offsetSize}px`;
+        this._element.style.height = `${this._slides[this._sliderIndex].offsetHeight}px`;
       }
   }, 100);
 
@@ -373,7 +386,7 @@ class A11yCarousel {
    */
   autoPlay = () => {
     if(this._canAutoSlide) {
-      this.setSlider(this._sliderIndex + 1);
+      this.setSlider(parseInt(this._sliderIndex) + 1);
     }
   };
 

@@ -17,7 +17,7 @@ img {
   display: block;
   max-width: 100%;
 }
-*:focus {
+button:focus {
   outline: 3px solid #ffa500;
 }
 button {
@@ -33,4 +33,32 @@ button {
     background:  #555;
     color: #fff;
   }
+}
+.custom-class {
+  position: relative;
+}
+#my-slider-play {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+}
+#my-slider-prev {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+#my-slider-next {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.dots {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
 }
