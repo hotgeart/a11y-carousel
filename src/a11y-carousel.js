@@ -356,12 +356,11 @@ class A11yCarousel {
       this.setSize();
     } else {
       this.setSize();
+      // If there's imgs and when need to wait them
+      imgs[imgs.length-1].addEventListener('load', () => {
+        this.setSize();
+      });
     }
-
-    // If there's imgs and when need to wait them
-    imgs[imgs.length-1].addEventListener('load', () => {
-      this.setSize();
-    });
   };
 
   /**
