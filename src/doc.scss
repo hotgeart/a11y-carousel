@@ -293,6 +293,7 @@ button {
     color: transparent;
     font-size: 0;
     line-height: 0;
+    transition: all .3s;
 
     &:after {
       display: inline-block;
@@ -392,6 +393,7 @@ button {
       height: 20px;
       background: $primary;
       border-radius: 50%;
+      transition: all .3s;
 
       &.active {
         &:after {
