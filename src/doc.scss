@@ -151,6 +151,7 @@ body {
   background: #fff;
   border: 30px solid #f0f5f8;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  overflow-x: hidden;
 }
 
 .container {
@@ -306,7 +307,8 @@ button {
       font-size: 14px;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: $dark;
 
       &:after {
