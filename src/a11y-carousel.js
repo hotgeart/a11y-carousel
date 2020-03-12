@@ -18,7 +18,7 @@ class A11yCarousel {
       height: `auto`,
       gesture: true,
       pauseOnHover: true,
-      className: `custom-class`,
+      className: `a11y-carousel`,
       ariaRoledescription: `carousel`,
       ariaLabel: `Slideshow description`,
       playText: `Start slide show`,
@@ -350,7 +350,6 @@ class A11yCarousel {
    */
   initSlidesSize = () => {
     const imgs = Array.from(this._element.querySelectorAll(`img`));
-
     // If there's no imgs or the imgs are cached
     if (imgs.length == 0) {
       this.setSize();
