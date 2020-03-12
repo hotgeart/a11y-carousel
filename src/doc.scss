@@ -149,7 +149,7 @@ $dark: #333;
 
 body {
   background: #fff;
-  border: 30px solid #f0f5f8;
+  border: 1.875rem solid #f0f5f8;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   overflow-x: hidden;
 }
@@ -171,13 +171,13 @@ h1 {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 700;
   margin: 0.625rem 0 1.875rem 0;
 }
 
 h3 {
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 700;
   margin: 0.625rem 0 1.875rem 0;
 }
@@ -205,6 +205,7 @@ a {
 }
 
 img {
+  display: block;
   max-width: 100%;
 }
 
@@ -212,31 +213,25 @@ small {
   font-size: 50%;
 }
 
-button {
-  cursor: pointer;
-  appearance: none;
-  border: 0;
-  border-radius: 0;
-  box-shadow: 0;
-}
-
 .demo-slider {
   background: $primary;
   color: white;
   position: relative;
-  margin-bottom: 100px;
+  margin-bottom: 6.25rem;
 
-  &:before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: -45px;
-    right: -50px;
-    display: block;
-    width: 100px;
-    height: 100px;
-    opacity: .2;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23161616;%7D%3C/style%3E%3C/defs%3E%3Cg id='Calque_2' data-name='Calque 2'%3E%3Ccircle class='cls-1' cx='32.5' cy='2.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='2.5' cy='2.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='32.5' cy='32.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='2.5' cy='32.5' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+  @media (min-width: 1120px) {
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -2.8125rem;
+      right: -3.125rem;
+      display: block;
+      width: 6.25rem;
+      height: 6.25rem;
+      opacity: .2;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23161616;%7D%3C/style%3E%3C/defs%3E%3Cg id='Calque_2' data-name='Calque 2'%3E%3Ccircle class='cls-1' cx='32.5' cy='2.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='2.5' cy='2.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='32.5' cy='32.5' r='2.5'/%3E%3Ccircle class='cls-1' cx='2.5' cy='32.5' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+    }
   }
 
   #demo {
@@ -244,15 +239,15 @@ button {
     z-index: 1;
     > div > div {
       display: flex;
-      height: 300px;
+      height: 18.75rem;
 
       .media {
-        flex: 1 0 400px;
+        flex: 1 0 40%;
         background-repeat: no-repeat;
         background-size: cover;
       }
 
-      .captation {
+      .caption {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
@@ -260,7 +255,7 @@ button {
         justify-content: center;
         align-content: stretch;
         align-items: flex-start;
-        padding: 0 50px 0 40px;
+        padding: 0 3.125rem 0 2.5rem;
 
         h3 {
           margin-top: 0;
@@ -281,16 +276,49 @@ button {
           }
         }
       }
+
+      @media (max-width: 600px) {
+        display: block;
+        height: auto;
+        min-height: auto;
+        max-height: auto;
+
+        .media {
+          display: none;
+        }
+
+        .caption {
+          h3 {
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin-top: 3.75rem!important;
+          }
+        }
+      }
+
+      @media (max-width: 430px) {
+        .caption {
+          h3 {
+            font-size: 1.25rem;
+          }
+        }
+      }
     }
   }
   #demo-play {
+    cursor: pointer;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0;
     background: white;
-    width: 42px;
-    height: 42px;
+    width: 2.625rem;
+    height: 2.625rem;
     position: absolute;
     z-index: 10;
-    top: 4px;
-    left: 4px;
+    top: 0.25rem;
+    left: 0.25rem;
     color: transparent;
     font-size: 0;
     line-height: 0;
@@ -303,8 +331,8 @@ button {
       font-family: "Font Awesome 5 Free";
       text-indent: 0;
       color: $primary;
-      line-height: 32px;
-      font-size: 14px;
+      line-height: 2rem;
+      font-size: 0.875rem;
     }
 
     &:hover,
@@ -324,19 +352,24 @@ button {
   }
   #demo-prev,
   #demo-next {
+    cursor: pointer;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0;
     background: white;
-    width: 42px;
-    height: 42px;
+    width: 2.625rem;
+    height: 2.625rem;
     position: absolute;
     z-index: 10;
     top: 50%;
-    left: -21px;
+    left: -1.3125rem;
     color: transparent;
     font-size: 0;
     line-height: 0;
     transform: translateY(-50%);
     transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.3);
 
     &:after {
       display: inline-block;
@@ -345,13 +378,13 @@ button {
       font-family: "Font Awesome 5 Free";
       text-indent: 0;
       color: $primary;
-      line-height: 32px;
-      font-size: 16px;
+      line-height: 2rem;
+      font-size: 1rem;
     }
 
     &:hover,
     &:focus {
-      left: -30px;
+      left: -1.875rem;
       background: $dark;
 
       &:after {
@@ -362,7 +395,7 @@ button {
 
   #demo-next {
     left: auto;
-    right: -21px;
+    right: -1.3125rem;
 
     &:after {
       content: "\f054";
@@ -371,7 +404,7 @@ button {
     &:hover,
     &:focus {
       left: auto;
-      right: -30px;
+      right: -1.875rem;
       background: $dark;
     }
   }
@@ -381,18 +414,23 @@ button {
     z-index: 10;
     left: 0;
     right: 0;
-    bottom: -40px;
+    bottom: -2.5rem;
     text-align: center;
 
     button {
+      cursor: pointer;
+      appearance: none;
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0;
       display: inline-block;
-      margin: 0 5px;
+      margin: 0 0.3125rem;
       position: relative;
       color: transparent;
       font-size: 0;
       line-height: 0;
-      width: 20px;
-      height: 20px;
+      width: 1.25rem;
+      height: 1.25rem;
       background: $primary;
       border-radius: 50%;
       transition: all .3s;
@@ -401,10 +439,10 @@ button {
         &:after {
           content: "";
           position: absolute;
-          top: 5px;
-          left: 5px;
-          height: 10px;
-          width: 10px;
+          top: 0.3125rem;
+          left: 0.3125rem;
+          height: 0.625rem;
+          width: 0.625rem;
           border-radius: 50%;
           background: white;
         }
@@ -421,7 +459,7 @@ button {
 .btn {
   background: $primary;
   color: white;
-  padding: 20px 90px;
+  padding: 1.25rem 5.625rem;
   text-transform: uppercase;
   text-indent: 0;
 
@@ -436,16 +474,17 @@ pre, code {
 }
 
 pre {
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 }
 
 table {
   width: 100%;
+  margin-bottom: 2.5rem;
 
   thead {
     th {
       text-transform: uppercase;
-      padding: 15px;
+      padding: 0.9375rem;
       font-weight: bold;
     }
   }
@@ -454,18 +493,120 @@ table {
     tr {
       &:nth-of-type(odd) {
         background: #f8f8f8;
-        border-top: 1px solid #e5e5e5;
-        border-bottom: 1px solid #e5e5e5;
+        border-top: 0.0625rem solid #e5e5e5;
+        border-bottom: 0.0625rem solid #e5e5e5;
       }
 
       td {
-        padding: 15px;
+        padding: 0.9375rem;
       }
     }
+  }
+}
+
+@media (max-width: 570px) {
+  .table-wrapper {
+    overflow-x: scroll;
   }
 }
 
 footer {
   text-align: center;
   margin: 4.5rem 0 3rem 0;
+}
+
+
+/* STARTER */
+
+.slideshow {
+  position: relative;
+
+  button {
+    cursor: pointer;
+    appearance: none;
+    border: 0;
+    box-shadow: 0;
+    background: white;
+    border-radius: 0;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+
+    &:after {
+      display: inline-block;
+      font-size: 1.5rem;
+      color: black;
+      line-height: 1;
+      font-weight: 700;
+      font-family: "Font Awesome 5 Free";
+    }
+  }
+
+  [id*="play"] {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+
+    &:after {
+      content: "\f04c";
+    }
+
+    &.paused {
+      &:after {
+        content: "\f04b";
+      }
+    }
+  }
+
+  [id*="prev"],
+  [id*="next"] {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+
+    &:after {
+      content: "\f060";
+    }
+  }
+
+  [id*="next"] {
+    left: auto;
+    right: 0;
+
+    &:after {
+      content: "\f061";
+    }
+  }
+
+  .dots {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+
+    button {
+      background: transparent;
+
+      &:after {
+        color: white;
+        content: "\f111";
+      }
+
+      &.active {
+        &:after {
+          font-weight: normal;
+          content: "\f111";
+        }
+      }
+    }
+  }
 }

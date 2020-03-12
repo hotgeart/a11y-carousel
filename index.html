@@ -15,12 +15,12 @@
             <p class="lead">
                 The accessible slideshow / carousel you've always dreamed of <small>(or may be it's just me)</small>
             </p>
-            <h2 class="visually-hidden">Demo :</h2>
+            <h2 id="demo" class="visually-hidden">Demo :</h2>
             <div id="demo">
                 <div>
                     <div>
                         <div class="media" style="background-image: url('https://picsum.photos/400/300?random=1')"></div>
-                        <div class="captation">
+                        <div class="caption">
                             <h3>Accessible</h3>
                             <p>A11y Carousel is fully accessible with the keyboard and has the right aria attributes. The carousel is based on <a href="https://www.w3.org/TR/wai-aria-practices/examples/carousel/carousel-1.html">the example provided by the W3C</a>.</p>
                         </div>
@@ -29,7 +29,7 @@
                 <div>
                     <div>
                         <div class="media" style="background-image: url('https://picsum.photos/400/300?random=2')"></div>
-                        <div class="captation">
+                        <div class="caption">
                             <h3>IE 10 Compatible</h3>
                             <p>A11y Carousel support all browsers even that ugly duck. Because you and me know your clients are still on IE.</p>
                         </div>
@@ -38,14 +38,14 @@
                 <div>
                     <div>
                         <div class="media" style="background-image: url('https://picsum.photos/400/300?random=3')"></div>
-                        <div class="captation">
+                        <div class="caption">
                             <h3>Vanilla JavaScript</h3>
                             <p>No jQuery here, no dependecie either, just the JS you love <3. Also only 14.5 KB!</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <h2>How to use it?</h2>
+            <h2 id="how">How to use it?</h2>
             <h3>HTML</h3>
             <pre><code class="html">&lt;div id="my-slider"&gt;
 &nbsp;&nbsp; &nbsp;&lt;div&gt; &nbsp;&lt;!-- ⚠ Don't apply css to the div --&gt;
@@ -71,247 +71,357 @@
     className: 'my-super-slider'
 });</code></pre>
 
-            <h2>Settings</h2>
+            <h2 id="settings">Settings</h2>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Default
+                            </th>
+                            <th>
+                                Infos
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                autoplay
+                            </td>
+                            <td>
+                                true (bool)
+                            </td>
+                            <td>
+                                Enables autoplay
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                autoplaySpeed
+                            </td>
+                            <td>
+                                7000 (int)
+                            </td>
+                            <td>
+                                Autoplay Speed in milliseconds
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                transitionSpeed
+                            </td>
+                            <td>
+                                300 (int)
+                            </td>
+                            <td>
+                                Transition speed in milliseconds (the fade effect)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                arrows
+                            </td>
+                            <td>
+                                true (bool)
+                            </td>
+                            <td>
+                                Enables previous and next buttons
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                dots
+                            </td>
+                            <td>
+                                false (bool)
+                            </td>
+                            <td>
+                                Enables slide pagination
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                sliderIndex
+                            </td>
+                            <td>
+                                0 (int)
+                            </td>
+                            <td>
+                                From where the slider start
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                width
+                            </td>
+                            <td>
+                                auto (string)
+                            </td>
+                            <td>
+                                If you want to fix the width
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                height
+                            </td>
+                            <td>
+                                auto (string)
+                            </td>
+                            <td>
+                                If you want to fix the height
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                gesture
+                            </td>
+                            <td>
+                                true (bool)
+                            </td>
+                            <td>
+                                Enables swipe left and right on mobile
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                pauseOnHover
+                            </td>
+                            <td>
+                                true (bool)
+                            </td>
+                            <td>
+                                Pause the slider on hover or focus
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                className
+                            </td>
+                            <td>
+                                a11y-carousel
+                            </td>
+                            <td>
+                                Class name for the wrapper of your slider and controls
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ariaRoledescription
+                            </td>
+                            <td>
+                                carousel (string)
+                            </td>
+                            <td>
+                                Attribute aria-roledescription
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ariaLabel
+                            </td>
+                            <td>
+                                Slideshow description (string)
+                            </td>
+                            <td>
+                                What's in your carousel? Example : News Highlights
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                playText
+                            </td>
+                            <td>
+                                Start slide show (string)
+                            </td>
+                            <td>
+                                Text to start the slide show (screen reader)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                pauseText
+                            </td>
+                            <td>
+                                Stop slide show (string)
+                            </td>
+                            <td>
+                                Text to stop/pause the slide show (screen reader)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                previousText
+                            </td>
+                            <td>
+                                Previous (string)
+                            </td>
+                            <td>
+                                Text for the button preivous
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                nextText
+                            </td>
+                            <td>
+                                Next (string)
+                            </td>
+                            <td>
+                                Text for the button preivous
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ofText
+                            </td>
+                            <td>
+                                of (string)
+                            </td>
+                            <td>
+                                Text for the aria-label of the slide.<br>
+                                aria-label="1 of 5"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                slideText
+                            </td>
+                            <td>
+                                Slide (string)
+                            </td>
+                            <td>
+                                Text for the pagination (dots).<br>
+                                Slide X
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                tablistText
+                            </td>
+                            <td>
+                                Choose slide to display (string)
+                            </td>
+                            <td>
+                                Text for the aria-label of the pagination (dots)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Default
-                        </th>
-                        <th>
-                            Infos
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            autoplay
-                        </td>
-                        <td>
-                            true (bool)
-                        </td>
-                        <td>
-                            Enables autoplay
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            autoplaySpeed
-                        </td>
-                        <td>
-                            7000 (int)
-                        </td>
-                        <td>
-                            Autoplay Speed in milliseconds
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            transitionSpeed
-                        </td>
-                        <td>
-                            300 (int)
-                        </td>
-                        <td>
-                            Transition speed in milliseconds (the fade effect)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            arrows
-                        </td>
-                        <td>
-                            true (bool)
-                        </td>
-                        <td>
-                            Enables previous and next buttons
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            dots
-                        </td>
-                        <td>
-                            false (bool)
-                        </td>
-                        <td>
-                            Enables slide pagination
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            sliderIndex
-                        </td>
-                        <td>
-                            0 (int)
-                        </td>
-                        <td>
-                            From where the slider start
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            width
-                        </td>
-                        <td>
-                            auto (string)
-                        </td>
-                        <td>
-                            If you want to fix the width
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            height
-                        </td>
-                        <td>
-                            auto (string)
-                        </td>
-                        <td>
-                            If you want to fix the height
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            gesture
-                        </td>
-                        <td>
-                            true (bool)
-                        </td>
-                        <td>
-                            Enables swipe left and right on mobile
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            pauseOnHover
-                        </td>
-                        <td>
-                            true (bool)
-                        </td>
-                        <td>
-                            Pause the slider on hover or focus
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            className
-                        </td>
-                        <td>
-                            a11y-carousel
-                        </td>
-                        <td>
-                            Class name for the wrapper of your slider and controls
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            ariaRoledescription
-                        </td>
-                        <td>
-                            carousel (string)
-                        </td>
-                        <td>
-                            Attribute aria-roledescription
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            ariaLabel
-                        </td>
-                        <td>
-                            Slideshow description (string)
-                        </td>
-                        <td>
-                            What's in your carousel? Example : News Highlights
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            playText
-                        </td>
-                        <td>
-                            Start slide show (string)
-                        </td>
-                        <td>
-                            Text to start the slide show (screen reader)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            pauseText
-                        </td>
-                        <td>
-                            Stop slide show (string)
-                        </td>
-                        <td>
-                            Text to stop/pause the slide show (screen reader)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            previousText
-                        </td>
-                        <td>
-                            Previous (string)
-                        </td>
-                        <td>
-                            Text for the button preivous
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            nextText
-                        </td>
-                        <td>
-                            Next (string)
-                        </td>
-                        <td>
-                            Text for the button preivous
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            ofText
-                        </td>
-                        <td>
-                            of (string)
-                        </td>
-                        <td>
-                            Text for the aria-label of the slide.<br>
-                            aria-label="1 of 5"
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            slideText
-                        </td>
-                        <td>
-                            Slide (string)
-                        </td>
-                        <td>
-                            Text for the pagination (dots).<br>
-                            Slide X
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            tablistText
-                        </td>
-                        <td>
-                            Choose slide to display (string)
-                        </td>
-                        <td>
-                            Text for the aria-label of the pagination (dots)
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2 id="starter">SASS Starter</h2>
+            <p>Here is a sass starter width Font Awesome 5 Free:</p>
+            <div id="slideshow">
+                <div>
+                    <img src="https://picsum.photos/920/300?random=4" alt="illustration image 1">
+                </div>
+                <div>
+                    <img src="https://picsum.photos/920/300?random=5" alt="illustration image 2">
+                </div>
+                <div>
+                    <img src="https://picsum.photos/920/300?random=6" alt="illustration image 3">
+                </div>
+            </div>
+
+<pre style="margin-top:3rem; max-height: 18.75rem; overflow-y: scroll;"><code class="sass">.slideshow {
+    position: relative;
+  
+    button {
+      cursor: pointer;
+      appearance: none;
+      border: 0;
+      box-shadow: 0;
+      background: white;
+      border-radius: 0;
+      font-size: 0;
+      line-height: 0;
+      color: transparent;
+  
+      &:after {
+        display: inline-block;
+        font-size: 1.5rem;
+        color: black;
+        line-height: 1;
+        font-weight: 700;
+        font-family: "Font Awesome 5 Free";
+      }
+    }
+  
+    [id*="play"] {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 3rem;
+      height: 3rem;
+  
+      &:after {
+        content: "\f04c";
+      }
+  
+      &.paused {
+        &:after {
+          content: "\f04b";
+        }
+      }
+    }
+  
+    [id*="prev"],
+    [id*="next"] {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 0;
+      width: 3rem;
+      height: 3rem;
+      transform: translateY(-50%);
+  
+      &:after {
+        content: "\f060";
+      }
+    }
+  
+    [id*="next"] {
+      left: auto;
+      right: 0;
+  
+      &:after {
+        content: "\f061";
+      }
+    }
+  
+    .dots {
+      position: absolute;
+      z-index: 10;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+  
+      button {
+        background: transparent;
+  
+        &:after {
+          color: white;
+          content: "\f111";
+        }
+  
+        &.active {
+          &:after {
+            font-weight: normal;
+            content: "\f111";
+          }
+        }
+      }
+    }
+  }
+</code></pre>
 
         </main>
         <footer>
@@ -324,9 +434,13 @@
     <script>
       document.addEventListener("DOMContentLoaded", function(event) {
         var slider = new A11yCarousel("#demo", {
-          autoplay: true,
           dots: true,
           className: 'demo-slider'
+        });
+        var starter = new A11yCarousel("#slideshow", {
+          autoplay: true,
+          dots: true,
+          className: 'slideshow'
         });
         hljs.initHighlightingOnLoad();
       });
