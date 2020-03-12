@@ -44,6 +44,11 @@ class A11yCarousel {
     this._canAutoSlide = true;
     this._autoPlayInterval = null;
 
+    // if the id doesn't exist we exit
+    if(this._element === null) {
+      return false;
+    }
+
     if (this.getSettings().transitionSpeed > this.getSettings().autoplaySpeed) {
       throw `a11y Carousel: 🤚 transitionSpeed can be greater than autoplaySpeed`;
     }

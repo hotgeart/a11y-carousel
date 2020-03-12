@@ -40,7 +40,7 @@
                         <div class="media" style="background-image: url('src/img/slide-2.jpg')"></div>
                         <div class="captation">
                             <h3>Vanilla JavaScript</h3>
-                            <p>No jQuery here, no dependecie either, just the JS you love <3.</p>
+                            <p>No jQuery here, no dependecie either, just the JS you love <3. Also only 14.5 KB!</p>
                         </div>
                     </div>
                 </div>
@@ -64,9 +64,10 @@
 &lt;script&nbsp;src="path/a11y-carousel.min.js"&gt;&lt;/script&gt;</code></pre>
             <h3>JS</h3>
             
-            <pre><code class="javascript">var slider = new A11yCarousel("#my-slider", {
+            <pre><code class="javascript">var slider = new A11yCarousel("#my-slider", { // Use an ID not a class
     autoplay: true,
     dots: true,
+    arrows: true,
     className: 'my-super-slider'
 });</code></pre>
 
