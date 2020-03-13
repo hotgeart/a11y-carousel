@@ -121,7 +121,7 @@ class A11yCarousel {
           `${this._selector.slice(1)}-tabpanel-${index}`
         );
         dotButton.setAttribute(`id`, `${this._selector.slice(1)}-tab-${index}`);
-        dotButton.setAttribute(`slider-id`, index);
+        dotButton.setAttribute(`data-slider-id`, index);
         dotButton.setAttribute(`role`, `tab`);
         dotButton.setAttribute(`tabindex`, -1);
 
@@ -137,7 +137,7 @@ class A11yCarousel {
 
         // Event Listeners dots click
         dotButton.addEventListener(`click`, e => {
-          this.setSlider(e.target.getAttribute(`slider-id`));
+          this.setSlider(e.target.getAttribute(`data-slider-id`));
         });
 
         // Event Listeners dots keyboard arrows
@@ -146,21 +146,21 @@ class A11yCarousel {
           if (e.which == 39) {
             if (e.currentTarget.nextSibling !== null) {
               e.currentTarget.nextSibling.focus();
-              this.setSlider(e.currentTarget.nextSibling.getAttribute(`slider-id`));
+              this.setSlider(e.currentTarget.nextSibling.getAttribute(`data-slider-id`));
             }
           }
           // <-
           if (e.which == 37) {
             if (e.currentTarget.previousSibling !== null) {
               e.currentTarget.previousSibling.focus();
-              this.setSlider(e.currentTarget.previousSibling.getAttribute(`slider-id`));
+              this.setSlider(e.currentTarget.previousSibling.getAttribute(`data-slider-id`));
             }
           }
           // HOME
           if (e.which == 36) {
             e.currentTarget.parentNode.childNodes[0].focus();
             this.setSlider(
-              e.currentTarget.parentNode.childNodes[0].getAttribute(`slider-id`)
+              e.currentTarget.parentNode.childNodes[0].getAttribute(`data-slider-id`)
             );
           }
           // END
@@ -171,7 +171,7 @@ class A11yCarousel {
             this.setSlider(
               e.currentTarget.parentNode.childNodes[
                 e.currentTarget.parentNode.childNodes.length - 1
-              ].getAttribute(`slider-id`)
+              ].getAttribute(`data-slider-id`)
             );
           }
         });
@@ -184,13 +184,13 @@ class A11yCarousel {
 
     if (this.getSettings().arrows) {
       // Prev settings
-      prevBtn.setAttribute(`aria-controls`, this._selector);
+      prevBtn.setAttribute(`aria-controls`, this._selector.slice(1));
       prevBtn.textContent = this.getSettings().previousText;
       prevBtn.setAttribute(`id`, this._prevId);
       prevBtn.classList.add(`prev`);
 
       // Next settings
-      nextBtn.setAttribute(`aria-controls`, this._selector);
+      nextBtn.setAttribute(`aria-controls`, this._selector.slice(1));
       nextBtn.textContent = this.getSettings().nextText;
       nextBtn.setAttribute(`id`, this._nextId);
       nextBtn.classList.add(`next`);
@@ -330,7 +330,7 @@ class A11yCarousel {
     if (this.getSettings().dots) {
       const dots = Array.from(this.dotsWrapper.children);
       dots.forEach(item => {
-        if(item.getAttribute(`slider-id`) == newIndex) {
+        if(item.getAttribute(`data-slider-id`) == newIndex) {
           item.classList.add(`active`);
           item.setAttribute(`tabindex`, 0);
         } else {
