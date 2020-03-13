@@ -65,10 +65,10 @@
             <h3>JS</h3>
             
             <pre><code class="javascript">var slider = new A11yCarousel("#my-slider", { // Use an ID not a class
-    autoplay: true,
+    // Your settings
     dots: true,
-    arrows: true,
-    className: 'my-super-slider'
+    className: 'my-super-slider',
+    ariaLabel: 'News Highlights'
 });</code></pre>
 
             <h2 id="settings">Settings</h2>
@@ -226,7 +226,7 @@
                                 ariaLabel
                             </td>
                             <td>
-                                Slideshow description (string)
+                                Slideshow (string)
                             </td>
                             <td>
                                 What's in your carousel? Example : News Highlights
@@ -316,7 +316,7 @@
             </div>
 
             <h2 id="starter">SASS Starter</h2>
-            <p>Here is a sass starter width Font Awesome 5 Free:</p>
+            <p>Because I'm nice, here is a sass starter width Font Awesome 5 Free:</p>
             <div id="slideshow">
                 <div>
                     <img src="http://placehold.jp/40/2d53fe/ffffff/920x300.jpg?text=SLIDE%201" alt="illustration image 1">
@@ -450,12 +450,13 @@
       document.addEventListener("DOMContentLoaded", function(event) {
         var slider = new A11yCarousel("#demo", {
           dots: true,
-          className: 'demo-slider'
+          className: 'demo-slider',
+          ariaLabel: 'Demo Slider'
         });
         var starter = new A11yCarousel("#slideshow", {
-          autoplay: true,
           dots: true,
-          className: 'slideshow'
+          className: 'slideshow',
+          ariaLabel: 'Demo Slider for SASS Starter'
         });
         hljs.initHighlightingOnLoad();
       });

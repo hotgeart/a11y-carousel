@@ -20,7 +20,7 @@ class A11yCarousel {
       pauseOnHover: true,
       className: `a11y-carousel`,
       ariaRoledescription: `carousel`,
-      ariaLabel: `Slideshow description`,
+      ariaLabel: `Slideshow`,
       playText: `Start slide show`,
       pauseText: `Stop slide show`,
       previousText: `Previous`,
