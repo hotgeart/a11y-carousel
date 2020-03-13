@@ -329,7 +329,8 @@
                 </div>
             </div>
 
-<pre style="margin-top:3rem; max-height: 18.75rem; overflow-y: scroll;"><code class="sass">.slideshow {
+<pre style="margin-top:3rem; max-height: 18.75rem; overflow-y: scroll;"><code class="sass"> // 1rem -> 16px
+.slideshow {
     position: relative;
   
     button {
@@ -350,6 +351,14 @@
         line-height: 1;
         font-weight: 700;
         font-family: "Font Awesome 5 Free";
+      }
+  
+      &:hover,
+      &:focus {
+        background: black;
+        &:after {
+          color: white;
+        }
       }
     }
   
@@ -401,7 +410,7 @@
       z-index: 10;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: 0.625rem;
       text-align: center;
   
       button {
@@ -418,10 +427,16 @@
             content: "\f111";
           }
         }
+  
+        &:hover,
+        &:focus {
+          &::after {
+            color: black;
+          }
+        }
       }
     }
-  }
-</code></pre>
+  }</code></pre>
 
         </main>
         <footer>

@@ -540,6 +540,14 @@ footer {
       font-weight: 700;
       font-family: "Font Awesome 5 Free";
     }
+
+    &:hover,
+    &:focus {
+      background: black;
+      &:after {
+        color: white;
+      }
+    }
   }
 
   [id*="play"] {
@@ -590,7 +598,7 @@ footer {
     z-index: 10;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0.625rem;
     text-align: center;
 
     button {
@@ -605,6 +613,13 @@ footer {
         &:after {
           font-weight: normal;
           content: "\f111";
+        }
+      }
+
+      &:hover,
+      &:focus {
+        &::after {
+          color: black;
         }
       }
     }
