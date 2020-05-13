@@ -19,7 +19,8 @@ class A11yCarousel {
       gesture: true,
       pauseOnHover: true,
       className: `a11y-carousel`,
-      ariaRoledescription: `carousel`,
+      ariaRoledescriptionCarousel: `carousel`,
+      ariaRoledescriptionSlide: `slide`,
       ariaLabel: `Slideshow`,
       playText: `Start slide show`,
       pauseText: `Stop slide show`,
@@ -81,11 +82,6 @@ class A11yCarousel {
 
     // Set all the slides
     this._slides.forEach((item, index) => {
-      item.setAttribute(`role`, `tabpanel`);
-      item.setAttribute(
-        `aria-labelledby`,
-        `${this._selector.slice(1)}-tab-${index}`
-      );
       item.setAttribute(`id`, `${this._selector.slice(1)}-tabpanel-${index}`);
       item.setAttribute(
         `aria-label`,
@@ -106,6 +102,15 @@ class A11yCarousel {
 
     /* DOTS */
     if (this.getSettings().dots) {
+      // If we've dots (pagination) we need an aria-labelledby and the role tabpanel for each slide
+      this._slides.forEach((item, index) => {
+        item.setAttribute(
+          `aria-labelledby`,
+          `${this._selector.slice(1)}-tab-${index}`
+        );
+        item.setAttribute(`role`, `tabpanel`);
+      });
+
       // Create a wrapper for the dots
       this.dotsWrapper = document.createElement(`div`);
       this.dotsWrapper.classList.add(`dots`);
@@ -144,6 +149,7 @@ class A11yCarousel {
         dotButton.addEventListener(`keydown`, e => {
           // ->
           if (e.which == 39) {
+            e.preventDefault();
             if (e.currentTarget.nextSibling !== null) {
               e.currentTarget.nextSibling.focus();
               this.setSlider(e.currentTarget.nextSibling.getAttribute(`data-slider-id`));
@@ -151,6 +157,7 @@ class A11yCarousel {
           }
           // <-
           if (e.which == 37) {
+            e.preventDefault();
             if (e.currentTarget.previousSibling !== null) {
               e.currentTarget.previousSibling.focus();
               this.setSlider(e.currentTarget.previousSibling.getAttribute(`data-slider-id`));
@@ -158,6 +165,7 @@ class A11yCarousel {
           }
           // HOME
           if (e.which == 36) {
+            e.preventDefault();
             e.currentTarget.parentNode.childNodes[0].focus();
             this.setSlider(
               e.currentTarget.parentNode.childNodes[0].getAttribute(`data-slider-id`)
@@ -165,6 +173,7 @@ class A11yCarousel {
           }
           // END
           if (e.which == 35) {
+            e.preventDefault();
             e.currentTarget.parentNode.childNodes[
               e.currentTarget.parentNode.childNodes.length - 1
             ].focus();
@@ -175,6 +184,15 @@ class A11yCarousel {
             );
           }
         });
+      });
+    } else {
+      // If we DON'T have dots (pagination) we need an aria-roledescription and the role group for each slide
+      this._slides.forEach((item, index) => {
+        item.setAttribute(
+          `aria-roledescription`,
+          `slide`
+        );
+        item.setAttribute(`role`, `group`);
       });
     }
 

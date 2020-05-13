@@ -515,6 +515,32 @@ footer {
   margin: 4.5rem 0 3rem 0;
 }
 
+/* STARTER EXAMPLE */
+.slideshow {
+  background: $primary;
+
+  #slideshow {
+    > div {
+        h3 {
+          text-transform: uppercase;
+        font-size: 3.75rem;
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 7.5rem 0;
+
+        @media (max-width: 600px) {
+          font-size: 2.5rem;
+          padding: 6.25rem 0;
+        }
+
+        @media (max-width: 360px) {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
 
 /* STARTER */
 
