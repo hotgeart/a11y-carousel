@@ -283,9 +283,6 @@ class A11yCarousel {
     // Pause Hover && Focus
     if (this.getSettings().pauseOnHover) {
       sliderWrapper.addEventListener(`mouseenter`, () => {
-        document.onmouseover = (e) =>  {
-          console.log(e.target.id == this._playId);
-        }
         if (true) {
           this._canAutoSlide = false;
           this._element.setAttribute(`aria-live`, `polite`);
