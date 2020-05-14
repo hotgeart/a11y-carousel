@@ -283,11 +283,24 @@ class A11yCarousel {
     // Pause Hover && Focus
     if (this.getSettings().pauseOnHover) {
       sliderWrapper.addEventListener(`mouseenter`, () => {
-        this._canAutoSlide = false;
-        this._element.setAttribute(`aria-live`, `polite`);
+        document.onmouseover = (e) =>  {
+          console.log(e.target.id == this._playId);
+        }
+        if (true) {
+          this._canAutoSlide = false;
+          this._element.setAttribute(`aria-live`, `polite`);
+        }
       });
+    
       sliderWrapper.addEventListener(`mouseleave`, () => {
-        if (this._wasPlaying) {
+        let isControlsFocused = false;
+        try {
+          isControlsFocused = sliderWrapper.querySelector(`#${document.activeElement.id}`) ? true : false;
+        } catch (err) {
+          // ...
+        }
+
+        if (this._wasPlaying && !isControlsFocused) {
           this._canAutoSlide = true;
           this._element.setAttribute(`aria-live`, `off`);
         }
