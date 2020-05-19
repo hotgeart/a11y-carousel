@@ -58,9 +58,10 @@ class A11yCarousel {
     const sliderWrapper = document.createElement(`div`);
     sliderWrapper.setAttribute(
       `aria-roledescription`,
-      this.getSettings().ariaRoledescription
+      this.getSettings().ariaRoledescriptionCarousel
     );
     sliderWrapper.setAttribute(`aria-label`, this.getSettings().ariaLabel);
+    sliderWrapper.setAttribute(`role`, `region`);
     sliderWrapper.classList.add(this.getSettings().className);
 
     // Move the current HTML for the slide show in the new wrapper
@@ -153,6 +154,12 @@ class A11yCarousel {
             if (e.currentTarget.nextSibling !== null) {
               e.currentTarget.nextSibling.focus();
               this.setSlider(e.currentTarget.nextSibling.getAttribute(`data-slider-id`));
+            } else {
+              // In case there no previous sibling we focus the first dot (tab)
+              e.currentTarget.parentNode.childNodes[0].focus();
+              this.setSlider(
+                e.currentTarget.parentNode.childNodes[0].getAttribute(`data-slider-id`)
+              );
             }
           }
           // <-
@@ -161,6 +168,16 @@ class A11yCarousel {
             if (e.currentTarget.previousSibling !== null) {
               e.currentTarget.previousSibling.focus();
               this.setSlider(e.currentTarget.previousSibling.getAttribute(`data-slider-id`));
+            } else {
+              // In case there no previous sibling we focus the last dot (tab)
+              e.currentTarget.parentNode.childNodes[
+                e.currentTarget.parentNode.childNodes.length - 1
+              ].focus();
+              this.setSlider(
+                e.currentTarget.parentNode.childNodes[
+                  e.currentTarget.parentNode.childNodes.length - 1
+                ].getAttribute(`data-slider-id`)
+              );
             }
           }
           // HOME
